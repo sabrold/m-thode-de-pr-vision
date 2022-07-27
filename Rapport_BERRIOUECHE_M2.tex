@@ -1,0 +1,887 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{tikz}
+\usepackage{color}
+\usepackage{soul}
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ifthen}
+\usepackage{fancybox}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{}
+\geometry{left=1cm , right=1cm , top=1.5 cm , bottom=1.5cm}
+\thispagestyle{empty}
+\begin{document}
+
+
+\begin{center}
+\textbf{République Algérienne Démocratique et Populaire \\
+\setlength{\parskip}{2mm}
+Ministère de l'enseignement Supérieure et de la Recherche Scientifique\\ }
+\setlength{\parskip}{3mm}
+\textbf{Université des sciences et de la Technologie Houari Boumediene \\
+\setlength{\parskip}{3mm} }
+\setlength{\parskip}{3mm}
+\begin{Huge}
+\setlength{\parskip}{4mm}
+\begin{center}
+\includegraphics[width=5cm]{logo_usthb.png}
+\end{center}
+
+\textbf{Faculté de Mathématique}
+\end{Huge}
+\end{center}
+
+\begin{center}
+\textbf{Département de Recherche Opérationnelle}
+\end{center}
+\vspace{1\baselineskip}
+
+\begin{center}
+\begin{Huge}
+\textbf{Rapport}
+
+\end{Huge}\\
+\end{center}
+
+\bigskip
+\begin{center}
+\begin{Large}
+\textbf{Méthodes de Prévision \\
+\setlength{\parskip}{3mm}
+Lissage exponentiel }
+\end{Large}
+\end{center}
+\vspace{5\baselineskip}
+
+\begin{itemize}
+\item[•]\textbf{Présenté par:}
+\setlength{\parskip}{3mm}
+
+\begin{itemize} \item[-] BERRIOUECHE Sabrina
+\end{itemize}
+\setlength{\parskip}{3mm}
+\item[•]\textbf{Professeur du module:}
+\setlength{\parskip}{3mm}
+
+\begin{itemize} \item[-] Mr CHAABANE Djamal
+\end{itemize}
+
+
+\end{itemize}
+\vspace{5\baselineskip}
+\begin{center}
+\textbf{2021 - 2022}
+\end{center}
+\begin{document}
+
+\part{SUR LE PLAN TH\'{E}ORIQUE}
+
+\subsection{\textbf{Lissage exponentiel simple} :}
+
+\qquad  Avec l'absence de la tendance et de la saisonnalit\'{e}.\\
+
+\begin{itemize}
+\item [•]\underline{\textbf{Algorithme}} :
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_%
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ 
+
+\'{E}tape 01: (Initialisation)
+
+\texttt{\qquad \qquad La valeur initiale du lissage est fix\'{e}e par }
+
+\texttt{\qquad \qquad \qquad }$\widehat{\mathtt{x}}_{1}=x_{1}\ ou\ \widehat{%
+\mathtt{x}}_{1}=\overline{\mathtt{x}}$
+
+\texttt{\qquad \qquad Lire }$\alpha $
+
+\'{E}tape 02:
+
+\texttt{\qquad \qquad Pour j = 2 \`{a} N}
+
+\texttt{\qquad \qquad \qquad on calcule }$\widehat{\mathtt{x}}_{1}=\widehat{%
+\mathtt{x}}_{j-1}\mathtt{+(1-\alpha )(x}_{j}-\widehat{\mathtt{x}}_{j-1})$
+
+\texttt{\qquad \qquad Fin pour;}
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_%
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\\
+
+\item[•] \underline{\textbf{Justification de l'algorithme}} :\\
+
+La valeur $\widehat{X}_{N}(h)=$ fournie par le mod\`{e}le du lissage
+exponentiel simple avec la constante de lissage $\alpha $ (entre $0$ et $1)$
+est 
+\begin{equation}
+\widehat{X}_{N}(h)=\widehat{X}_{N}+h=(1-\alpha )\cdot \sum_{j=0}^{N-1}\alpha
+^{j}X_{N-j}
+\end{equation}
+
+On remplace $N$ par $N-1$ dans $(1)$%
+\begin{equation*}
+\widehat{X}_{N-1}(h)=\widehat{X}_{N-1}+h=(1-\alpha )\cdot
+\sum_{j=0}^{N-1}\alpha ^{j}X_{N-1-j}
+\end{equation*}%
+On multiplie par $\alpha $%
+\begin{equation*}
+\alpha \cdot \widehat{X}_{N-1}(h)=\widehat{X}_{N-1}+h=(1-\alpha )\cdot
+\sum_{j=0}^{N-2}\alpha ^{j+1}X_{N-(j+1)}
+\end{equation*}%
+\begin{equation}
+\alpha \cdot \widehat{X}_{N-1}(h)=(1-\alpha )\sum_{j=0}^{N-2}\alpha
+^{j^{^{\prime }}}X_{N-j^{\prime }}
+\end{equation}%
+On fait la soustraction de $(1)-(2)$, on aura%
+\begin{eqnarray*}
+\widehat{X}_{N}-\alpha \cdot \widehat{X}_{N-1}(h) &=&(1-\alpha )\cdot
+\sum_{j=0}^{N-1}\alpha ^{j}X_{N-j}^{\prime }-(1-\alpha
+)\sum_{j=0}^{N-2}\alpha ^{j^{^{\prime }}}X_{N-j^{\prime }} \\
+&=&(1-\alpha )\cdot (\sum_{j=0}^{N-1}\alpha ^{j}X_{N-j}^{\prime
+}-\sum_{j=0}^{N-2}\alpha ^{j^{^{\prime }}}X_{N-j^{\prime }}) \\
+&=&(1-\alpha )\cdot X_{N}
+\end{eqnarray*}%
+Qui donne la formule de lissage simple suivante : 
+\begin{equation*}
+\widehat{X}_{N}=\widehat{X}_{N-1}+(1-\alpha )(X_{N}-\widehat{X}_{N-1})
+\end{equation*}%
+Et la valeur de premier lissage $\widehat{X}_{1}=X_{1}.$
+\end{itemize}
+
+\subsection{\textbf{Lissage exponentiel double} :}
+
+\qquad  Avec la pr\'{e}sence de la tendance . \\
+
+\begin{itemize}
+\item[•] \underline{\textbf{Algorithme}} :
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_%
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\'{E}tape 01: (Initialisation)
+
+\qquad \qquad $S_{1}(1)=X$ et $S_{2}(1)=(1-\alpha )^{2}\cdot X_{1}$
+
+\'{E}tape 02:
+
+\qquad \qquad Pour $j=2$ \`{a} $N$
+
+\qquad \qquad \qquad $S_{1}(j)=\alpha \cdot S_{1}(j-1)+(1-\alpha )\cdot
+X_{j} $
+
+\qquad \qquad \qquad $S_{2}(j)=\alpha \cdot S_{2}(j-1)+(1-\alpha )\cdot
+S_{1}(j)$
+
+\qquad \qquad Fin pour;
+
+\'{E}tape 03:
+
+\qquad \qquad On calcule
+
+\qquad \qquad \qquad $\widehat{\alpha }_{1}(N)=2S_{1}(N)-S_{2}(N)$
+
+\qquad \qquad \qquad $\widehat{\alpha }_{2}(N)=\frac{(1-\alpha )}{\alpha }%
+(S_{1}(N)-S_{2}(N))$
+
+\'{E}tape 04:
+
+\qquad \qquad Pr\'{e}vision
+
+\qquad \qquad \qquad $\widehat{X}_{N+h}=\widehat{\alpha }_{1}(N)+\widehat{%
+\alpha }_{2}(N)+h$
+\end{itemize}
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_%
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\\
+
+\begin{itemize}
+\item[•] \underline{\textbf{Justification}} :\\
+
+Le mod\`{e}le de lissage double est donn\'{e} par la formule suivante :%
+\begin{equation*}
+\widehat{X}_{N+h}=\widehat{\alpha }_{1}(N)+\widehat{\alpha }_{2}(N)+h
+\end{equation*}
+
+On cherche $\widehat{\alpha }_{1}(N)$ et $\widehat{\alpha }_{2}(N)$ par 
+\begin{equation*}
+\min_{\widehat{\alpha }_{1},\widehat{\alpha }_{2}}S^{2}=||\alpha (X_{t}-%
+\widehat{\alpha }_{1}-\widehat{\alpha }_{2}(t-N))||^{2}\Longrightarrow
+Somme=\sum_{j=0}^{N-1}\alpha ^{j}(X_{N-j}-\widehat{\alpha }_{1}+\widehat{%
+\alpha }_{2}\times j)^{2}
+\end{equation*}%
+On d\'{e}rive la formule "somme" par rapport \`{a} $\widehat{\alpha }_{1}$
+et $\widehat{\alpha }_{2},$ on ontient 
+\begin{equation*}
+\left\{ 
+\begin{array}{c}
+\frac{\partial S^{2}}{\partial \widehat{\alpha }_{1}}=\frac{\partial }{%
+\partial \widehat{\alpha }_{1}}(\sum_{j=0}^{N-1}\alpha ^{j}(X_{N-j}-\widehat{%
+\alpha }_{1}+\widehat{\alpha }_{2}\times j)^{2})=-2\sum_{j=0}^{N-1}\alpha
+^{j}(X_{N-j}-\widehat{\alpha }_{1}+\widehat{\alpha }_{2}\times j)^{2} \\ 
+\\ 
+\frac{\partial S^{2}}{\partial \widehat{\alpha }_{2}}=\frac{\partial }{%
+\partial \widehat{\alpha }_{2}}(\sum_{j=0}^{N-1}\alpha ^{j}(X_{N-j}-\widehat{%
+\alpha }_{1}+\widehat{\alpha }_{2}\times j)^{2})=-2\sum_{j=0}^{N-1}j\alpha
+^{j}(X_{N-j}-\widehat{\alpha }_{1}+\widehat{\alpha }_{2}\times j)^{2}%
+\end{array}%
+\right. 
+\end{equation*}%
+On s'annule les deux d\'{e}riv\'{e}es, on aura%
+\begin{equation*}
+\left\{ 
+\begin{array}{c}
+\frac{\partial S^{2}}{\partial \widehat{\alpha }_{1}}=0 \\ 
+\\ 
+\frac{\partial S^{2}}{\partial \widehat{\alpha }_{2}}=0%
+\end{array}%
+\right. \Longrightarrow \left\{ 
+\begin{array}{c}
+-2\sum_{j=0}^{N-1}\alpha ^{j}(X_{N-j}-\widehat{\alpha }_{1}+\widehat{\alpha }%
+_{2}\times j)^{2}=0 \\ 
+\\ 
+-2\sum_{j=0}^{N-1}j\alpha ^{j}(X_{N-j}-\widehat{\alpha }_{1}+\widehat{\alpha 
+}_{2}\times j)^{2}=0%
+\end{array}%
+\right. 
+\end{equation*}
+
+\begin{equation}
+\Longrightarrow \left\{ 
+\begin{array}{c}
+\widehat{\alpha }_{1}\sum_{j=0}^{N-1}\alpha ^{j}-\widehat{\alpha }%
+_{2}\sum_{j=0}^{N-1}j\alpha ^{j}=\sum_{j=0}^{N-1}\alpha ^{j}X_{N-j}\text{ \
+\ } \\ 
+\\ 
+\widehat{\alpha }_{1}\sum_{j=0}^{N-1}j\alpha ^{j}-\widehat{\alpha }%
+_{2}\sum_{j=0}^{N-1}j^{2}\alpha ^{j}=\sum_{j=0}^{N-1}j\alpha ^{j}X_{N-j}%
+\end{array}%
+\right. 
+\end{equation}
+
+Quand $N$ tend vers $\infty ,$ on aura 
+\begin{eqnarray*}
+\sum_{j=0}^{N-1}\alpha ^{j} &=&\frac{1}{1-\alpha } \\
+\sum_{j=0}^{N-1}j\alpha ^{j} &=&\frac{\alpha }{(1-\alpha )^{2}} \\
+\sum_{j=0}^{N-1}j^{2}\alpha ^{j} &=&\frac{\alpha (\alpha +1)}{(1-\alpha )^{3}%
+}
+\end{eqnarray*}%
+On remplace $(3)$%
+\begin{equation*}
+\left\{ 
+\begin{array}{c}
+\widehat{\alpha }_{1}-\widehat{\alpha }_{2}\frac{1}{1-\alpha }=(1-\alpha
+)\sum_{j=0}^{N-1}\alpha ^{j}X_{N-j} \\ 
+\\ 
+\widehat{\alpha }_{1}\alpha -\widehat{\alpha }_{2}\frac{\alpha (\alpha +1)}{%
+(1-\alpha )}=(1-\alpha )^{2}\sum_{j=0}^{N-1}j\alpha ^{j}X_{N-j}%
+\end{array}%
+\right. 
+\end{equation*}
+
+On d\'{e}finie les lissage comme suit 
+\begin{equation*}
+\left\{ 
+\begin{array}{c}
+S_{1}(N)=(1-\alpha )\sum_{j=0}^{N-1}\alpha ^{j}X_{N-j} \\ 
+\\ 
+S_{1}(N)=(1-\alpha )\sum_{j=0}^{N-1}\alpha ^{j}S_{1}(N-j)%
+\end{array}%
+\right. \Rightarrow \left\{ 
+\begin{array}{c}
+S_{1}(N)=(1-\alpha )\sum_{j=0}^{N-1}\alpha ^{j}X_{N-j} \\ 
+\\ 
+S_{1}(N)=(1-\alpha )\sum_{j=0}^{N-1}j\alpha ^{j}X_{N-j}+(1-\alpha )S_{1}(N)%
+\end{array}%
+\right. 
+\end{equation*}%
+Qui donne le syst\`{e}me d'\'{e}quations lin\'{e}aire suivant%
+\begin{equation*}
+\begin{array}{c}
+S_{1}(N)=\widehat{\alpha }_{1}-\widehat{\alpha }_{2}\frac{1}{1-\alpha }\text{
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ } \\ 
+\\ 
+S_{2}(N)-(1-\alpha )S_{1}(N)=\widehat{\alpha }_{1}\alpha -\widehat{\alpha }%
+_{2}\frac{\alpha (\alpha +1)}{(1-\alpha )}%
+\end{array}%
+\end{equation*}%
+On d\'{e}termine $\widehat{\alpha }_{1}$ et $\widehat{\alpha }_{2}$%
+\begin{eqnarray*}
+\widehat{\alpha }_{1} &=&2\cdot S_{1}(N)-S_{2}(N) \\
+&& \\
+\widehat{\alpha }_{2} &=&\frac{1}{1-\alpha }(S_{1}(N)-S_{2}(N))
+\end{eqnarray*}
+
+Cela implique 
+\begin{eqnarray*}
+S_{1}(N) &=&\alpha \cdot S_{1}(N-1)+(1-\alpha )\cdot X_{N} \\
+&& \\
+S_{2}(N) &=&\alpha \cdot S_{2}(N-1)+(1-\alpha )\cdot S_{1}(N)
+\end{eqnarray*}%
+Et les premiers valeurs de $S_{1}(N)$ et $S_{2}(N)$ sont $X_{1}$ et $%
+(1-\alpha )^{2}X_{1}$ respevtivement.
+\end{itemize}
+
+\part{SUR LE PLAN PRATIQUE}
+
+\subsection{\textbf{Implémentation des algorithmes en MATLAB} :}
+
+\subsubsection{\protect\underline{Le code de lissage simple}:}
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_%
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\qquad \%code de lissage exponentiel simple
+
+\qquad \%Faire entrer la s\'{e}rie chronologique X\_N et alpha
+
+\qquad \%Etape 01 de lissage simple : Initialisation
+
+\qquad \%La premi\`{e}re valeur de lissage
+
+\qquad \qquad lissage\_simple(1)= X\_N(1);
+
+\qquad \qquad lissage\_initial(1)=lissage\_simple(1);
+
+\qquad\ \%Etape 02 de lissage simple : calcul de lissage
+
+\qquad \qquad for i = 2:N+1
+
+\qquad \qquad \qquad lissage\_simple(i) =
+lissage\_initial(i-1)+(1-alpha)*(X\_N(i-1)-lissage\_initial(i-1));
+
+\qquad \qquad \qquad lissage\_initial(i)=lissage\_simple(i);
+
+\qquad \qquad end
+
+\qquad\ \%Affichage des r\'{e}sultats
+
+\qquad \qquad lissage\_simple;
+
+\qquad \qquad lissage\_simple([1])=[]
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_%
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\subsubsection{\protect\underline{Le code de lissage double}:}
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_%
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\%Code de lissage exponentiel double
+
+\qquad \%Faire entrer la s\'{e}rie chronologique X\_N et alpha et h
+
+\qquad \%Etape 01 : initialisation de lissage
+
+\qquad \qquad lissage\_double(1)= X\_N(1);
+
+\qquad \qquad S\_1(1)=lissage\_double(1);
+
+\qquad \qquad S\_2(1)=(1-alpha)\symbol{94}2*X\_N(2);
+
+\qquad \%Etape 02 : calcul de lissage
+
+\qquad \qquad for i = 2:N
+
+\qquad \qquad \qquad \%le premier lissage
+
+\qquad \qquad \qquad S\_1(i) = alpha*S\_1(i-1)+(1-alpha)*X\_N(i);
+
+\qquad \qquad \qquad \%le deuxi\`{e}me lissage
+
+\qquad \qquad \qquad S\_2(i) = alpha*S\_2(i-1)+(1-alpha)*S\_1(i);
+
+\qquad \qquad end
+
+\qquad \qquad\ S\_1
+
+\qquad \qquad S\_2
+
+\qquad\ \%Etape 03 : calcul des alpha's
+
+\qquad \qquad alpha\_chap\_1(N) = 2*S\_1(N)-S\_2(N);
+
+\qquad \qquad alpha\_chap\_1([1:N-1])=[]
+
+\qquad \qquad alpha\_chap\_2(N) = ((1-alpha)/alpha)*(S\_1(N)-S\_2(N));
+
+\qquad \qquad alpha\_chap\_2([1:N-1])=[]
+
+\qquad\ \%Etape 04 : pr\'{e}vision pour la p\'{e}riode h
+
+\qquad \qquad X\_chap\_(N+h) = alpha\_chap\_1+alpha\_chap\_2+h;
+
+\qquad \qquad X\_chap\_(N+h)
+
+\qquad \%Affichage des r\'{e}sultats
+
+\qquad \qquad S\_1 = transpose(S\_1)
+
+\qquad \qquad S\_2 = transpose(S\_2)
+
+\qquad \qquad\ alpha\_chap\_1 = transpose(alpha\_chap\_1)
+
+\qquad \qquad\ alpha\_chap\_2 = transpose(alpha\_chap\_2)
+
+\qquad \qquad X\_chap = transpose(X\_chap)
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_%
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\subsubsection{\protect\underline{Code de g\'{e}n\'{e}ration des s\'{e}ries
+chronologiques al\'{e}atoires}:}
+
+\qquad La fonction suivante prend "d\_start" et "d\_end" comme des entr\'{e}%
+es et sert \`{a} g\'{e}n\'{e}rer le temps :
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_%
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\qquad \%G\'{e}n\'{e}ration de temps pour les s\'{e}ries chronologique
+
+\qquad \qquad function [ m ] = SerieChronologique(d\_start,d\_end)
+
+\qquad \qquad \qquad \%La premi\`{e}re date de la s\'{e}rie
+
+\qquad \qquad \qquad date\_start = datevec(d\_start);
+
+\qquad \qquad \qquad \%La derni\`{e}re date de la s\'{e}rie
+
+\qquad \qquad \qquad\ date\_end = datevec(d\_end);
+
+\qquad \qquad \qquad tmp = (1:[date\_end-date\_start]*[12 1 0 0 0 0]')'-1;
+
+\qquad \qquad \qquad u = ones(size(tmp));
+
+\qquad \qquad \qquad m = datenum([date\_start(1)*u, date\_start(2)+tmp, u*[1
+0 0 0]]);
+
+\qquad \qquad end
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_%
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\qquad Puis, on ex\'{e}cute le code suivant pour avoir les donn\'{e}es d'une
+s\'{e}rie chronologique sans tendance :
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_%
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\%G\'{e}n\'{e}ration : S\'{e}rie chronologoique avec tendance
+
+\qquad \%G\'{e}n\'{e}ration : Temps
+
+\qquad \%dd-mmm-d : format de la date entr\'{e}e
+
+\qquad \%Choisir une date de d\'{e}but et une date de fin
+
+\qquad \qquad date =
+datestr(SerieChronologique('d\_start','d\_end'),'dd-mmm-yy');
+
+\qquad\ \%G\'{e}n\'{e}ration : Donn\'{e}es
+
+\qquad \qquad A = randi([1200 1950],24,1);
+
+\qquad \qquad val = sort(A);
+
+\qquad\ \%G\'{e}n\'{e}ration : S\'{e}rie chronologique
+
+\qquad \qquad esp=' '; espace=repmat(esp,24,1);
+
+\qquad \qquad time\_serie = strcat([date,espace,int2str(val)])
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_%
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\qquad Et on ex\'{e}cute le code suivant pour avoir les donn\'{e}es d'une s%
+\'{e}rie chronologique avec tendance :
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_%
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\%G\'{e}n\'{e}ration : S\'{e}rie chronologoique avec tendance
+
+\qquad \%G\'{e}n\'{e}ration : Temps
+
+\qquad \%dd-mmm-d : format de la date entr\'{e}e
+
+\qquad \%Choisir une date de d\'{e}but et une date de fin
+
+\qquad \qquad date =
+datestr(SerieChronologique('d\_start','d\_end'),'dd-mmm-yy');
+
+\qquad\ \%G\'{e}n\'{e}ration : Donn\'{e}es
+
+\qquad \qquad val = randi([1200 1950],24,1);
+
+\qquad\ \%G\'{e}n\'{e}ration : S\'{e}rie chronologique
+
+\qquad \qquad esp=' '; espace=repmat(esp,24,1);
+
+\qquad \qquad time\_serie = strcat([date,espace,int2str(val)])
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_%
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\subsection{\textbf{Applications} :}
+
+\subsubsection{\protect\underline{1\`{e}re application} : lissage
+exponentiel simple}
+
+\qquad Pour "$N=12$", "$d\_start=1-jan-2020$" et "$d\_end=1-jan-2021$", on
+applique le code de pr\'{e}vision suivant pour :
+
+\begin{itemize}
+\item[•]G\'{e}n\'{e}rer une s\'{e}rie chronologique sans tendance.
+
+\item[•] Choisir une meilleure valeur de la constante $\alpha .$
+
+\item[•] Calculer le lissage simple.
+\end{itemize}
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_%
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+display('1\TEXTsymbol{\backslash} LISSAGE EXPONENTIEL SIMPLE : S\'{e}rie
+chronologique sans tendance')
+
+\%Donner une valeur \`{a} N : N d\'{e}signe le nombre des \'{e}lements de la
+s\'{e}rie
+
+\qquad N = 12 ;
+
+\qquad \%G\'{e}n\'{e}ration : S\'{e}rie chronologoique sans tendance
+
+\qquad \qquad \%G\'{e}n\'{e}ration : Temps
+
+\qquad \qquad \%'dd-mm-yy' : la forme de la date entr\'{e}e
+
+\qquad \qquad \%Choisir une date de d\'{e}but et une date de fin
+
+\qquad \qquad \qquad date =
+datestr(SerieChronologique('1-jan-2019','1-jan-2020'),'dd-mmm-yy');
+
+\qquad \qquad \%G\'{e}n\'{e}ration : Donn\'{e}es
+
+\qquad \qquad \qquad val = randi([950 2000],N,1);
+
+\qquad \qquad \%Affichage : S\'{e}rie chronologique
+
+\qquad \qquad \qquad esp = ' '; espace = repmat(esp,N,1);
+
+\qquad \qquad \qquad serie\_chronologique =
+strcat([date,espace,int2str(val)])
+
+\qquad \%Lissage simple et le choix de la meilleure constante d'alpha
+
+\qquad \qquad \%D\'{e}claration des variables
+
+\qquad \qquad \qquad alpha = 0.01; j = 1;
+
+\qquad \qquad \qquad X\_N = val;
+
+\qquad \qquad \%Initialisation de min de l'erreur carr\'{e} et de la
+meilleure constante
+
+\qquad \qquad \%d'alpha
+
+\qquad \qquad \qquad min\_Err\_carre = inf;
+
+\qquad \qquad \qquad meilleur\_alpha = 0.01;
+
+\qquad \qquad \%faire varier le alpha
+
+\qquad \qquad \qquad while(alpha \TEXTsymbol{<}= 0.99)
+
+\qquad \qquad \qquad \qquad \%Etape 01 de lissage simple : Initialisation
+
+\qquad \qquad \qquad \qquad\ \%La premi\`{e}re valeur de lissage
+
+\qquad \qquad \qquad \qquad lissage\_simple(1) = X\_N(1);
+
+\qquad \qquad \qquad \qquad lissage\_initial(1) = lissage\_simple(1);
+
+\qquad \qquad \qquad \qquad \%Etape 02 de lissage simple : calcul de lissage
+
+\qquad \qquad \qquad \qquad for i = 2:N+1
+
+\qquad \qquad \qquad \qquad \qquad \%Calcul : lissage simple
+
+\qquad \qquad \qquad \qquad \qquad lissage\_simple(i) =
+lissage\_initial(i-1)+(1-alpha)*(X\_N(i-1)-lissage\_initial(i-1));
+
+\qquad \qquad \qquad \qquad \qquad lissage\_initial(i) = lissage\_simple(i);
+
+\qquad \qquad \qquad \qquad \qquad \%Calcul : l'erreur
+
+\qquad \qquad \qquad \qquad \qquad Err(i)=X\_N(i-1)-lissage\_simple(i);
+
+\qquad \qquad \qquad \qquad \qquad \%Calcul : l'erreur carr\'{e}
+
+\qquad \qquad \qquad \qquad \qquad Err\_carre(i) = Err(i)\symbol{94}2;
+
+\qquad \qquad \qquad \qquad \qquad \%Calcul : la moyenne de l'erreur carr%
+\'{e}
+
+\qquad \qquad \qquad \qquad \qquad Moyenne\_Err\_carre(j) =
+sum(Err\_carre)/N;
+
+\qquad \qquad \qquad \qquad end
+
+\qquad \qquad \qquad \qquad \%La condition pour que alpha soit meilleure
+
+\qquad \qquad \qquad \qquad if (Moyenne\_Err\_carre(j)\TEXTsymbol{<}%
+min\_Err\_carre)
+
+\qquad \qquad \qquad \qquad \qquad min\_Err\_carre = Moyenne\_Err\_carre(j);
+
+\qquad \qquad \qquad \qquad \qquad meilleur\_alpha = alpha;
+
+\qquad \qquad \qquad \qquad end
+
+\qquad \qquad \qquad \qquad \%Incr\'{e}mentation
+
+\qquad \qquad \qquad \qquad alpha = alpha + 0.01;
+
+\qquad \qquad \qquad \qquad\ j = j + 1;
+
+\qquad \qquad \qquad \qquad lissage\_simple([1]) = [];
+
+\qquad \qquad \qquad \qquad Err([1]) = [];
+
+\qquad \qquad \qquad \qquad Err\_carre([1]) = [];
+
+\qquad \qquad \qquad end
+
+\qquad \qquad \%Affichage des r\'{e}sultats
+
+\qquad \qquad \qquad lissage\_exponentiel\_simple =
+transpose(lissage\_simple)
+
+\qquad \qquad \qquad Erreur = transpose(Err)
+
+\qquad \qquad \qquad Erreur\_carre = transpose(Err\_carre)
+
+\qquad \qquad \qquad meilleur\_alpha
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_%
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\\
+
+\qquad On aura les r\'{e}sultas suivants : \\
+\begin{center}
+\includegraphics[width=15cm]{ex_pre_liss_simple_1.png}
+\end{center}\\
+\begin{center}
+\includegraphics[width=7cm]{ex_pre_liss_simple_2.png}\hspace{15mm}\includegraphics[width=3cm]{ex_pre_liss_simple_3.png}
+\end{center}\\
+\begin{center}
+
+\includegraphics[width=5cm]{ex_pre_liss_simple_4.png}
+\end{center}
+\\
+\begin{center}
+\includegraphics[width=5cm]{ex_pre_liss_simple_5.png}
+\end{center}
+
+
+\subsubsection{\protect\underline{2\`{e}me application} : lissage
+exponentiel double}
+
+\qquad Pour "$N=24$", "$d\_start=1-jan-2020$" , "$d\_end=1-jan-2020$" et $%
+h=9 $, on applique le code de pr\'{e}vision suivant pour :
+
+\begin{itemize}
+\item [•] G\'{e}n\'{e}rer une s\'{e}rie chronologique avec tendance.
+
+\item[•] Choisir une meilleure valeur de la constante $\alpha .$
+
+\item[•] Calculer le lissage double.
+\end{itemize}
+
+\bigskip
+
+\ \ \ 
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_%
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+display('1\TEXTsymbol{\backslash} LISSAGE EXPONENTIEL DOUBLE')
+
+display(' S\'{e}rie chronologique avec tendance')
+
+\qquad \%Choisir une valeur pour N et h
+
+\qquad \qquad N = 24; h = 9;
+
+\qquad \%G\'{e}n\'{e}ration : S\'{e}rie chronologoique avec tendance
+
+\qquad \qquad \%G\'{e}n\'{e}ration : Temps
+
+\qquad \qquad \%dd-mmm-d : format de la date entr\'{e}e
+
+\qquad \qquad \%Choisir une date de d\'{e}but et une date de fin
+
+\qquad \qquad \qquad date =
+datestr(SerieChronologique('1-jan-2020','1-jan-2022'),'dd-mmm-yy');
+
+\qquad \qquad \%G\'{e}n\'{e}ration : Donn\'{e}es
+
+\qquad \qquad \qquad A = randi([950 2000],N,1);
+
+\qquad \qquad \qquad val = sort(A);
+
+\qquad \qquad \%Affichage : S\'{e}rie chronologique
+
+\qquad \qquad \qquad esp = ' '; espace = repmat(esp,N,1);
+
+\qquad \qquad \qquad serie\_chronologique =
+strcat([date,espace,int2str(val)])
+
+\qquad \%Lissage double et le choix de la meilleure constante d'alpha
+
+\qquad \qquad \%D\'{e}claration des variables
+
+\qquad \qquad \qquad alpha = 0.01; j = 1;
+
+\qquad \qquad \qquad X\_N = val;
+
+\qquad \qquad \%Initialisation de min de l'erreur carr\'{e} et de la
+meilleure constante
+
+\qquad\ \qquad \%d'alpha
+
+\qquad \qquad \qquad min\_Err\_carre = inf;
+
+\qquad \qquad \qquad meilleur\_alpha = 0.01;
+
+\qquad \qquad \%faire varier le alpha
+
+\qquad \qquad while(alpha \TEXTsymbol{<}= 0.99)
+
+\qquad \qquad \%Etape 01 : initialisation de lissage
+
+\qquad \qquad \qquad lissage\_double(1 )= X\_N(1);
+
+\qquad \qquad \qquad S\_1(1) = lissage\_double(1);
+
+\qquad \qquad S\_2(1) = (1-alpha)\symbol{94}2*X\_N(1);
+
+\qquad \qquad \%Etape 02 : calcul de lissage
+
+\qquad \qquad \qquad for i = 2:N
+
+\qquad \qquad \qquad \qquad \%le premier lissage
+
+\qquad \qquad \qquad \qquad S\_1(i) = alpha*S\_1(i-1)+(1-alpha)*X\_N(i);
+
+\qquad \qquad \qquad \qquad \%le deuxi\`{e}me lissage
+
+\qquad \qquad \qquad \qquad S\_2(i) = alpha*S\_2(i-1)+(1-alpha)*S\_1(i);
+
+\qquad \qquad \qquad end
+
+\qquad \qquad \%Etape 03 : calcul des alpha's
+
+\qquad \qquad \qquad for i = 1:N
+
+\qquad \qquad \qquad \qquad alpha\_chap\_1(i) = 2*S\_1(i)-S\_2(i);
+
+\qquad \qquad \qquad \qquad alpha\_chap\_2(i) =
+((1-alpha)/alpha)*(S\_1(i)-S\_2(i));
+
+\qquad \qquad \qquad end
+
+\qquad\ \qquad \%Etape 04 : pr\'{e}vision pour la p\'{e}riode h
+
+\qquad \qquad \qquad for i = 1:N
+
+\qquad \qquad \qquad \qquad X\_chap(i) =
+alpha\_chap\_1(i)+(alpha\_chap\_2(i)*h);
+
+\qquad\ \qquad \qquad \qquad \%Calcul : l'erreur
+
+\qquad \qquad \qquad \qquad Err(i) = X\_N(i)-X\_chap(i);
+
+\qquad \qquad \qquad \qquad \%Calcul : l'erreur carr\'{e}
+
+\qquad \qquad \qquad \qquad Err\_carre(i) = Err(i)\symbol{94}2;
+
+\qquad \qquad \qquad end
+
+\qquad \qquad \qquad \%Calcul : la moyenne de l'erreur carr\'{e}
+
+\qquad \qquad \qquad \qquad Moyenne\_Err\_carre(j) = sum(Err\_carre)/N;
+
+\qquad \qquad \qquad \%La condition pour que alpha soit meilleure
+
+\qquad \qquad \qquad \qquad if (Moyenne\_Err\_carre(j)\TEXTsymbol{<}%
+min\_Err\_carre)
+
+\qquad \qquad \qquad \qquad \qquad\ min\_Err\_carre = Moyenne\_Err\_carre(j);
+
+\qquad\ \qquad \qquad \qquad \qquad meilleur\_alpha = alpha;
+
+\qquad \qquad \qquad \qquad end
+
+\qquad \qquad \qquad \%Incr\'{e}mentation d'alpha
+
+\qquad \qquad \qquad \qquad alpha = alpha + 0.01;
+
+\qquad \qquad \qquad \qquad j = j + 1;
+
+\qquad \qquad end
+
+\qquad\ \qquad \%Affichage des r\'{e}sultats
+
+\qquad \qquad \qquad S\_1 = transpose(S\_1)
+
+\qquad \qquad \qquad S\_2 = transpose(S\_2)
+
+\qquad \qquad alpha\_chap\_1 = transpose(alpha\_chap\_1)
+
+\qquad \qquad alpha\_chap\_2 = transpose(alpha\_chap\_2)
+
+\qquad \qquad X\_chap = transpose(X\_chap)
+
+\qquad \qquad Erreur = transpose(Err)
+
+\qquad \qquad Erreur\_carre = transpose(Err\_carre)
+
+\qquad \qquad meilleur\_alpha
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_%
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\\
+
+\qquad On aura les r\'{e}sultats suivants :%
+\\
+\begin{center}
+\includegraphics[width=10cm]{ex_pre_liss_double_1.png}
+\end{center}\\
+\begin{center}
+\includegraphics[width=5cm]{ex_pre_liss_double_2.png}\hspace{5mm}\includegraphics[width=5cm]{ex_pre_liss_double_3.png}\hspace{5mm}\includegraphics[width=5cm]{ex_pre_liss_double_4.png}\hspace{5mm}\includegraphics[width=5cm]{ex_pre_liss_double_5.png}
+\end{center}\\
+\begin{center}
+
+\includegraphics[width=5cm]{ex_pre_liss_double_6.png}\hspace{5mm}\includegraphics[width=5cm]{ex_pre_liss_double_7.png}\hspace{5mm}\includegraphics[width=5cm]{ex_pre_liss_double_8.png}
+\end{center}
+\\
+\begin{center}
+\includegraphics[width=5cm]{ex_pre_liss_double_9.png}
+\end{center}
+
+
+
+
+
+\end{document}
